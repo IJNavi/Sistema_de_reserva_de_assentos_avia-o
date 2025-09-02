@@ -126,16 +126,27 @@ class CLIInterface:
     def _mostrar_mapa_assentos(self, voo):
         print(f"\n=== Mapa de Assentos - Voo {voo.numero} ===")
         print("Legenda: [ ] Disponível  [X] Ocupado  [*] Sua reserva  [E] Emergência")
+        print("Classe: (P) Primeira  (X) Executiva  (C) Econômica")
+        print("Posição: J=Janela, M=Meio, C=Corredor\n")
 
         assentos_por_fileira = voo.aeronave['configuracao'][1]
         fileiras = sorted(set(int(num[:-1]) for num in voo.assentos.keys()))
 
+        # Cabeçalho com letras dos assentos - MAIS COMPACTO
+        header = "   "
+        for letra in 'ABCDEF'[:assentos_por_fileira]:
+            header += f"    {letra}    "  # 4 espaços antes, 4 depois
+        print(header)
+
         for fileira in fileiras:
-            linha = f"{fileira:2d} "
+            linha_assentos = f"{fileira:2d} "
+            linha_info = "   "
+
             for letra in 'ABCDEF'[:assentos_por_fileira]:
                 numero_assento = f"{fileira}{letra}"
                 assento = voo.assentos[numero_assento]
 
+                # Símbolo do assento
                 if assento.passageiro_cpf == self.usuario_logado.cpf:
                     simbolo = "[*]"
                 elif not assento.disponivel:
@@ -145,8 +156,37 @@ class CLIInterface:
                 else:
                     simbolo = "[ ]"
 
-                linha += f"{simbolo} "
-            print(linha)
+                linha_assentos += f"   {simbolo}   "  # 3 espaços antes, 3 depois
+
+                # Informações detalhadas - FORMATO COMPACTO
+                if assento.disponivel:
+                    # Classe: P=Primeira, X=Executiva, C=Econômica
+                    if assento.classe == 'primeira':
+                        classe_char = 'P'
+                        preço = "1000"
+                    elif assento.classe == 'executiva':
+                        classe_char = 'X'
+                        preço = "500"
+                    else:
+                        classe_char = 'C'
+                        preço = "200"
+
+                    # Posição: J=Janela, M=Meio, C=Corredor
+                    posicao_char = assento.posicao[0].upper()
+
+                    linha_info += f"{classe_char}{posicao_char}${preço}   "  # Formato compacto
+                else:
+                    linha_info += ""  # espaço para manter alinhamento
+
+            print(linha_assentos)
+            print(linha_info)
+
+        # Legenda detalhada
+        print("\n--- Legenda Detalhada ---")
+        print("Classe: P=Primeira (R$1000)  X=Executiva (R$500)  C=Econômica (R$200)")
+        print("Posição: J=Janela  M=Meio  C=Corredor")
+        print("Exemplo: 'PJ$1000' = Primeira Classe, Janela, R$1000")
+        print("[ ] Disponível  [X] Ocupado  [*] Sua reserva  [E] Emergência")
 
     def fazer_reserva(self):
         numero_voo = input("Número do voo: ")
