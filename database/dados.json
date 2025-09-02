@@ -1,18 +1,5 @@
 {
-  "passageiros": {
-    "14889878742": {
-      "cpf": "14889878742",
-      "nome": "Ivan Júlio da Silva Barbosa",
-      "data_nascimento": "20/01/1995",
-      "email": "ivanbrabo@email.com"
-    },
-    "02884328785": {
-      "cpf": "02884328785",
-      "nome": "Iracema Figueiredo da Silva Barbosa",
-      "data_nascimento": "25012011",
-      "email": "iracemus@email.com"
-    }
-  },
+  "passageiros": {},
   "voos": {
     "AA123": {
       "numero": "AA123",
@@ -1589,8 +1576,8 @@
           "posicao": "meio",
           "valor": 200.0,
           "emergencia": false,
-          "disponivel": false,
-          "passageiro_cpf": "02884328785"
+          "disponivel": true,
+          "passageiro_cpf": null
         },
         "29F": {
           "numero": "29F",
@@ -1598,8 +1585,8 @@
           "posicao": "janela",
           "valor": 200.0,
           "emergencia": false,
-          "disponivel": false,
-          "passageiro_cpf": "14889878742"
+          "disponivel": true,
+          "passageiro_cpf": null
         },
         "30A": {
           "numero": "30A",
@@ -4944,16 +4931,5 @@
       }
     }
   },
-  "reservas": {
-    "02884328785_AA123": {
-      "cpf": "02884328785",
-      "numero_voo": "AA123",
-      "numero_assento": "29E"
-    },
-    "14889878742_AA123": {
-      "cpf": "14889878742",
-      "numero_voo": "AA123",
-      "numero_assento": "29F"
-    }
-  }
+  "reservas": {}
 }
