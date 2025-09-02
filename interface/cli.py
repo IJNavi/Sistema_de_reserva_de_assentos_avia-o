@@ -132,7 +132,7 @@ class CLIInterface:
         assentos_por_fileira = voo.aeronave['configuracao'][1]
         fileiras = sorted(set(int(num[:-1]) for num in voo.assentos.keys()))
 
-        # Cabeçalho com letras dos assentos - MAIS COMPACTO
+        # Cabeçalho com letras dos assentos
         header = "   "
         for letra in 'ABCDEF'[:assentos_por_fileira]:
             header += f"    {letra}    "  # 4 espaços antes, 4 depois
@@ -174,7 +174,7 @@ class CLIInterface:
                     # Posição: J=Janela, M=Meio, C=Corredor
                     posicao_char = assento.posicao[0].upper()
 
-                    linha_info += f"{classe_char}{posicao_char}${preço}   "  # Formato compacto
+                    linha_info += f"{classe_char}{posicao_char}${preço}   "
                 else:
                     linha_info += ""  # espaço para manter alinhamento
 

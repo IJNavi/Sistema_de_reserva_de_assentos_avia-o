@@ -8,7 +8,7 @@ from interface.cli import CLIInterface
 def inicializar_dados():
     data_manager = DataManager()
 
-    # Configuração de aeronave exemplo
+    # Configuração de aeronave
     aeronave = {
         'configuracao': [30, 6],  # 30 fileiras, 6 assentos por fileira
         'classes': {
@@ -19,7 +19,7 @@ def inicializar_dados():
         'fileiras_emergencia': [10, 11]
     }
 
-    # Criar alguns voos de exemplo
+    # Voos
     if not data_manager.data['voos']:
         voos_exemplo = [
             Voo('AA123', 'GRU', 'JFK', '2024-12-01 08:00', aeronave),
