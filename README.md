@@ -43,7 +43,7 @@ sistema_reservas/
 
 ```bash
 # Clone o repositório
-git clone <url-do-repositorio>
+git clone <https://github.com/IJNavi/Sistema_de_reserva_de_assentos_avia-o.git>
 
 # Execute o programa
 python main.py
@@ -65,4 +65,4 @@ O sistema funciona tanto em **Windows** quanto em **Linux**, utilizando apenas b
 
 ## 📝  Licença
 
-Este projeto foi desenvolvido para fins acadêmicos.
+Este projeto foi desenvolvido por Ivan Barbosa para fins acadêmicos.
