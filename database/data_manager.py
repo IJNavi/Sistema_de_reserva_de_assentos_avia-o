@@ -15,12 +15,20 @@ class DataManager:
 
     def _initialize(self):
         self.data_file = Path('database/dados.json')
+        # Garante que a pasta existe
+        self.data_file.parent.mkdir(exist_ok=True)
         self.data = self._carregar_dados()
 
     def _carregar_dados(self):
-        if self.data_file.exists():
-            with open(self.data_file, 'r') as f:
-                return json.load(f)
+        try:
+            if self.data_file.exists() and self.data_file.stat().st_size > 0:
+                with open(self.data_file, 'r', encoding='utf-8') as f:
+                    return json.load(f)
+        except (json.JSONDecodeError, FileNotFoundError):
+            # Se houver erro no arquivo, recria com estrutura vazia
+            pass
+
+        # Retorna estrutura inicial se arquivo não existir ou estiver corrompido
         return {
             'passageiros': {},
             'voos': {},
@@ -29,8 +37,8 @@ class DataManager:
 
     def salvar_dados(self):
         with self._lock:
-            with open(self.data_file, 'w') as f:
-                json.dump(self.data, f, indent=2)
+            with open(self.data_file, 'w', encoding='utf-8') as f:
+                json.dump(self.data, f, indent=2, ensure_ascii=False)
 
     def get_passageiro(self, cpf):
         return self.data['passageiros'].get(cpf)

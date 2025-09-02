@@ -1,3 +1,5 @@
+from entities.assento import Assento
+
 class Voo:
     def __init__(self, numero, origem, destino, data_hora, aeronave):
         self.numero = numero
